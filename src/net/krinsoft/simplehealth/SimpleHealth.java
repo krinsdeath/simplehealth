@@ -19,7 +19,6 @@ public class SimpleHealth extends JavaPlugin {
 	public static PluginManager manager;
 	public static Plugin plugin;
 	public static HashMap<Player, SimplePlayer> players = new HashMap<Player, SimplePlayer>();
-	private int timer;
 	
 	// private variables
 	private static String LOG_PREFIX;
@@ -59,16 +58,16 @@ public class SimpleHealth extends JavaPlugin {
 			}
 		}
 		Settings.permissions();
-		timer = getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new SimpleTimer(this), 20, 20);
+		getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new SimpleTimer(this), 20, 20);
 		logAdd(Settings.locale.get(Settings.basic.getString("plugin.default_locale")).getString("plugin.enabled"));
 	}
 
 	@Override
 	public void onDisable() {
-		getServer().getScheduler().cancelTask(timer);
-		getServer().getScheduler().cancelAllTasks();
+		getServer().getScheduler().cancelTasks(this);
 		players.clear();
 		logAdd(Settings.locale.get(Settings.basic.getString("plugin.default_locale")).getString("plugin.disabled"));
+		Settings.locale.clear();
 	}
 
 	public static void logAdd(String msg) {
