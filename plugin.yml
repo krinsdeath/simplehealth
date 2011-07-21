@@ -3,3 +3,11 @@ main: net.krinsoft.simplehealth.SimpleHealth
 version: 0.3.1
 authors: [krinsdeath]
 depend: []
+
+permissions:
+    simplehealth.users:
+        description: configuration options for the 'users' group
+        default: true
+    simplehealth.admins:
+        description: configuration options for the 'admins' group
+        default: op
