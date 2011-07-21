@@ -1,5 +1,5 @@
 name: SimpleHealth
 main: net.krinsoft.simplehealth.SimpleHealth
-version: 0.2.0
-author: krinsdeath
+version: 0.3.0
+authors: [krinsdeath]
 depend: []

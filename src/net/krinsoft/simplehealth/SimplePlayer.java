@@ -31,7 +31,6 @@ public class SimplePlayer {
 	}
 
 	public String getGroup() {
-		// TODO Auto-generated method stub
 		return group;
 	}
 	
@@ -45,5 +44,10 @@ public class SimplePlayer {
 
 	public boolean isRespawning() {
 		return respawn;
+	}
+	
+	@Override
+	public String toString() {
+		return "SimplePlayer{name=" + player.getName() + ",group=" + getGroup() + "}";
 	}
 }

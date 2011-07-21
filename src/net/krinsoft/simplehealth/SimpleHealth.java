@@ -2,7 +2,6 @@ package net.krinsoft.simplehealth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Timer;
 import java.util.logging.Logger;
 
 import org.bukkit.World;
@@ -20,11 +19,11 @@ public class SimpleHealth extends JavaPlugin {
 	public static PluginManager manager;
 	public static Plugin plugin;
 	public static HashMap<Player, SimplePlayer> players = new HashMap<Player, SimplePlayer>();
+	private int timer;
 	
 	// private variables
 	private static String LOG_PREFIX;
 	private static Logger logger = Logger.getLogger("Minecraft");
-	private static final Timer timer = new Timer(true);
 	
 	// Listeners
 	private final PListener pListener = new PListener(this);
@@ -61,13 +60,13 @@ public class SimpleHealth extends JavaPlugin {
 			}
 		}
 		Settings.permissions();
-		timer.schedule(new SimpleTimer(this), 0, (long) 1000);
+		timer = getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new SimpleTimer(this), 20, 20);
 		logAdd(Settings.locale.get(Settings.basic.getString("plugin.default_locale")).getString("plugin.enabled"));
 	}
 
 	@Override
 	public void onDisable() {
-		timer.cancel();
+		getServer().getScheduler().cancelTask(timer);
 		players.clear();
 		logAdd(Settings.locale.get(Settings.basic.getString("plugin.default_locale")).getString("plugin.disabled"));
 	}

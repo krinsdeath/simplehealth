@@ -94,13 +94,15 @@ public class Settings {
 		String group = null;
 		if (basic.getBoolean("plugin.permissions", false)) {
 			for (String key : basic.getKeys("groups")) {
-				if (permissions.has(player, "simplehealth." + key)) {
+				if (player.hasPermission("simplehealth." + key)) {
 					group = key;
 					break;
 				} 				
 			}
 		}
-		if (group == null) { group = (player.isOp()) ? "admins" : "users"; }
+		if (group == null) {
+			group = (player.isOp()) ? "admins" : "users";
+		}
 		SimpleHealth.players.put(player, new SimplePlayer(player, group));
 		String user = Settings.locale.get(locale).getString("plugin.user_created").replaceAll("<user>", name);
 		user = user.replaceAll("<group>", group);

@@ -29,9 +29,10 @@ public class PListener extends PlayerListener {
 			if (Settings.basic.getKeys("groups." + sPlayer.getGroup() + ".items").contains(mat)) {
 				ItemStack item = player.getItemInHand();
 				int hp = Settings.basic.getInt("groups." + sPlayer.getGroup() + ".items." + mat, 0);
-				if (player.getHealth() + hp >= 20) { return; }
+				if (player.getHealth() + hp > 20) { return; }
 				hp = (player.getHealth() + hp <= 20) ? player.getHealth() + hp : 20;
 				item.setAmount(item.getAmount() - 1);
+				SimpleHealth.logAdd("Player placed: " + mat + " for " + hp + " total health.");
 				player.setItemInHand(item);
 				player.setHealth(hp);
 				event.setCancelled(true);
