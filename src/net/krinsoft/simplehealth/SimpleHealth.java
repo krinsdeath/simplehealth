@@ -27,6 +27,7 @@ public class SimpleHealth extends JavaPlugin {
 	
 	// Listeners
 	private final PListener pListener = new PListener(this);
+	private final EListener eListener = new EListener(this);
 
 	@Override
 	public void onEnable() {
@@ -38,6 +39,7 @@ public class SimpleHealth extends JavaPlugin {
 		manager.registerEvent(Event.Type.PLAYER_INTERACT, pListener, Event.Priority.Normal, this);
 		manager.registerEvent(Event.Type.PLAYER_RESPAWN, pListener, Event.Priority.Normal, this);
 		manager.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, pListener, Event.Priority.Highest, this);
+		manager.registerEvent(Event.Type.ENTITY_REGAIN_HEALTH, eListener, Event.Priority.Low, this);
 		Settings.dataFolder = getDataFolder();
 		if (Settings.configure()) {
 			LOG_PREFIX = Settings.locale.get(Settings.basic.getString("plugin.default_locale")).getString("plugin.log_prefix");
@@ -45,15 +47,12 @@ public class SimpleHealth extends JavaPlugin {
 		if (Settings.basic.getBoolean("plugin.peaceful", false)) {
 			String logMsg = "";
 			CraftWorld w;
-			net.minecraft.server.World mcWorld;
 			for (World world : this.getServer().getWorlds()) {
 				w = (CraftWorld) world;
 				if (world != null && Settings.basic.getStringList("plugin.peaceful_worlds", new ArrayList<String>()).contains(w.getName())) {
 					logMsg = Settings.locale.get(Settings.basic.getString("plugin.default_locale")).getString("plugin.peaceful_enabled").replaceAll("<world>", w.getName());
 					logAdd(logMsg);
-					mcWorld = w.getHandle();
-					mcWorld.allowMonsters = true;
-					mcWorld.spawnMonsters = 0;
+					world.setSpawnFlags(false, true);
 				} else {
 					continue;
 				}
@@ -67,6 +66,7 @@ public class SimpleHealth extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		getServer().getScheduler().cancelTask(timer);
+		getServer().getScheduler().cancelAllTasks();
 		players.clear();
 		logAdd(Settings.locale.get(Settings.basic.getString("plugin.default_locale")).getString("plugin.disabled"));
 	}
