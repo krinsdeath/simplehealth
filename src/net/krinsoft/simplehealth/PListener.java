@@ -26,13 +26,14 @@ public class PListener extends PlayerListener {
 			SimplePlayer sPlayer = SimpleHealth.players.get(player);
 			if (sPlayer == null) { sPlayer = Settings.addNewUser(player); }
 			String mat = event.getMaterial().toString().toLowerCase();
+			if (mat == null) { return; }
+			if (Settings.basic.getKeys("groups." + sPlayer.getGroup() + ".items") == null) { return; }
 			if (Settings.basic.getKeys("groups." + sPlayer.getGroup() + ".items").contains(mat)) {
 				ItemStack item = player.getItemInHand();
 				int hp = Settings.basic.getInt("groups." + sPlayer.getGroup() + ".items." + mat, 0);
 				if (player.getHealth() + hp > 20) { return; }
 				hp = (player.getHealth() + hp <= 20) ? player.getHealth() + hp : 20;
 				item.setAmount(item.getAmount() - 1);
-				SimpleHealth.logAdd("Player placed: " + mat + " for " + hp + " total health.");
 				player.setItemInHand(item);
 				player.setHealth(hp);
 				event.setCancelled(true);
@@ -54,7 +55,7 @@ public class PListener extends PlayerListener {
 		if (Settings.basic.getBoolean("plugin.permissions", false)) {
 			// permissions is used
 			for (String key : Settings.basic.getKeys("groups")) {
-				if (Settings.permissions.has(player, "simplehealth." + key)) {
+				if (Settings.permissions.has(player, "simplehealth." + key) || player.hasPermission("simplehealth." + key)) {
 					if (Settings.basic.getStringList("groups." + key + ".disabled_commands", new ArrayList<String>()).contains(key)) {
 						// command is listed as disabled for this group
 						event.setCancelled(true);
