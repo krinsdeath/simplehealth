@@ -1,0 +1,12 @@
+# Only variables contained in <> are parsed in the "plugin" section
+# Colors will not be parsed. These are console messages.
+plugin:
+  enabled: "<fullname> loaded."
+  disabled: "<fullname> disabled."
+  loaded: "American English localization loaded."
+  log_prefix: "[SH_v<version>] "
+  permissions:
+    loaded: "Permissions (v<permissions_version>) found."
+    failed: "Permissions not found. Defaulting to isOp()."
+  user_created: "User '<user>:<group>' created."
+  peaceful_enabled: "Peaceful mode is enabled for <world>"
