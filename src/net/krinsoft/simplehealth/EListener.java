@@ -15,6 +15,7 @@ public class EListener extends EntityListener {
 		plugin = instance;
 	}
 
+	@Override
 	public void onEntityRegainHealth(EntityRegainHealthEvent event) {
 		if (event.getEntity() instanceof Player) {
 			if (event.getRegainReason().equals(RegainReason.REGEN)) {

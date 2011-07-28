@@ -37,13 +37,12 @@ public class Settings {
 					SimpleHealth.logAdd(file.getName() + " created.");
 				} catch(IOException e) {
 					SimpleHealth.logAdd("Error creating " + file.getName());
-					e.printStackTrace();
 				} finally {
 					try {
 						in.close();
 						out.close();
 					} catch(IOException e) {
-						e.printStackTrace();
+						SimpleHealth.logAdd("Error closing stream " + e);
 					}
 				}
 			}

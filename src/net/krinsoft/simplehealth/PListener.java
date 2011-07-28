@@ -18,6 +18,7 @@ public class PListener extends PlayerListener {
 		plugin = instance;
 	}
 
+	@Override
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if (event.isCancelled()) { return; }
 		Player player = event.getPlayer();
@@ -40,9 +41,13 @@ public class PListener extends PlayerListener {
 			}
 		}
 	}
-	
+
+	@Override
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
+		if (SimpleHealth.players.get(player) == null) {
+			Settings.addNewUser(player);
+		}
 		SimpleHealth.players.get(player).setRespawn(true);
 	}
 	

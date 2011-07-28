@@ -22,7 +22,7 @@ public class SimpleHealth extends JavaPlugin {
 	
 	// private variables
 	private static String LOG_PREFIX;
-	private static Logger logger = Logger.getLogger("Minecraft");
+	private static final Logger logger = Logger.getLogger("SimpleHealth");
 	
 	// Listeners
 	private final PListener pListener = new PListener(this);

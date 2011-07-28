@@ -14,7 +14,7 @@ public class SimplePlayer {
 		setLastTick(System.currentTimeMillis());
 	}
 
-	public void setPlayer(Player player) {
+	public final void setPlayer(Player player) {
 		this.player = player;
 	}
 
@@ -34,7 +34,7 @@ public class SimplePlayer {
 		return group;
 	}
 	
-	public void setGroup(String group) {
+	public final void setGroup(String group) {
 		this.group = group;
 	}
 
