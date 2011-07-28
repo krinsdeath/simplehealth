@@ -4,7 +4,7 @@ plugin:
   enabled: "<fullname> loaded."
   disabled: "<fullname> disabled."
   loaded: "American English localization loaded."
-  log_prefix: "[SH_v<version>] "
+  log_prefix: "[<name>] "
   permissions:
     loaded: "Permissions (v<permissions_version>) found."
     failed: "Permissions not found. Defaulting to isOp()."
