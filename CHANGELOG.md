@@ -1,5 +1,11 @@
 Changelog
 =========
+Version 0.3.3
+-------------
+*   Fixed(?) concurrency issues (I hope)
+*   Added PVP worlds. It may interfere with other plugins, so don't use it on those worlds.
+*   Removed spawn flags in favor of ENTITY_REGAIN_HEALTH event.
+
 Version 0.3.1
 -------------
 *   Removed all NMS dependency.
