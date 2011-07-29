@@ -1,0 +1,5 @@
+name: SimpleHealth
+main: net.krinsoft.simplehealth.SimpleHealth
+version: ${project.version}
+authors: [krinsdeath]
+depend: []
